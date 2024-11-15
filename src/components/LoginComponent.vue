@@ -41,8 +41,8 @@ export default {
     data(){
         return {
             user:{
-                email: 'user1@mail.com',
-                password: '12345'
+                email: '',
+                password: ''
             }
         }
     },
@@ -56,10 +56,15 @@ export default {
         login(){
             service.setLogin(this.user)
             .then(res=>{
+                console.error(res);
                 if(res !== undefined){
                     Global.token = 'Bearer '+ res;
                     this.$router.push('/perfil')
                 } 
+            })
+            .catch(error => {
+                console.error(error);
+                alert('No se ha podido iniciar sesion, comprueba los datos');
             })
         }
     }

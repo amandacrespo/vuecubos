@@ -58,7 +58,7 @@ export default class CubosService {
     }
 
     setLogin(user){
-        return new Promise((resolve)=>{
+        return new Promise((resolve, reject)=>{
             const endpoint = 'api/manage/login';
             let url = Global.urlCubos + endpoint;
             let headers = {
@@ -68,6 +68,10 @@ export default class CubosService {
             .then(response => {
                 resolve(response.data.response)
             })
+            .catch(error => {
+                reject(error)
+            })
+
         })
     }
 
