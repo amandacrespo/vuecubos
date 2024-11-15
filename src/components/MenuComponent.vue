@@ -25,14 +25,20 @@
                             Seguridad
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="nav-item" v-if="!isLogin">
+                            <li class="nav-item">
                                 <router-link class="dropdown-item" to="/login">Iniciar sesión</router-link>
                             </li>    
-                            <li class="nav-item" v-if="!isLogin">
-                                <router-link class="dropdown-item" to="/registro">Registrarse</router-link>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/">Registrarse</router-link>
                             </li>    
-                            <li class="nav-item" v-if="isLogin">
-                                <router-link class="dropdown-item" @click="logout()">Cerrar sesión</router-link>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/perfil">Perfil</router-link>
+                            </li>    
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/compras">Compras</router-link>
+                            </li>    
+                            <li class="nav-item">
+                                <button class="dropdown-item" @click="logout()">Cerrar sesión</button>
                             </li>    
                         </ul>
                     </li>
@@ -43,14 +49,15 @@
 </template>
 
 <script>
+import { Global } from '@/Global';
 import CubosService from '@/services/CubosService';
 
 const service = new CubosService();
 export default {
-    props: ['isLogin'],
     data(){
         return{
-            marcas: []
+            marcas: [],
+            isLogin: Global.token
         }
     },
     mounted(){
@@ -61,8 +68,16 @@ export default {
     },
     methods: {
         logout(){
-            localStorage.removeItem('bearer_token');
-            this.$emit('updateIsLogin', false);
+            // localStorage.removeItem('bearer_token');
+            Global.token = null;
+            this.$router.push('/login');
+        }
+    },
+    watch:{
+        'isLogin'(nextVal, prevVal){
+            if(nextVal !== prevVal){
+                this.isLogin = Global.token !== null;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <MenuComponent :isLogin="isLogin" @updateIsLogin="updateIsLogin"/>
+  <MenuComponent/>
   <router-view></router-view>
 </template>
 
@@ -11,16 +11,7 @@ export default {
     MenuComponent
     
   },
-  data(){
-    return{
-      isLogin: localStorage.getItem('bearer_token') !== null,
-    }
-  },
-  methods: {
-    updateIsLogin(status){
-      this.isLogin = status;
-    }
-  }
+ 
 }
 </script>
 

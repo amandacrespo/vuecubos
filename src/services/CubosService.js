@@ -61,7 +61,42 @@ export default class CubosService {
         return new Promise((resolve)=>{
             const endpoint = 'api/manage/login';
             let url = Global.urlCubos + endpoint;
-            axios.post(url, user)
+            let headers = {
+                'Content-type': 'application/json'
+            }
+            axios.post(url, user, {headers: headers})
+            .then(response => {
+                resolve(response.data.response)
+            })
+        })
+    }
+
+    getPerfil(token){
+        return new Promise((resolve)=>{
+            const endpoint = 'api/Manage/PerfilUsuario';
+            let url = Global.urlCubos + endpoint;
+            let header = {
+                'Authorization': token,
+                'Content-type': 'application/json'
+            }
+            
+            axios.get(url, {headers: header})
+            .then(response => {
+                resolve(response.data)
+            })
+        })
+    }
+
+    getCompras(token){
+        return new Promise((resolve)=>{
+            const endpoint = 'api/Compra/ComprasUsuario';
+            let url = Global.urlCubos + endpoint;
+            let header = {
+                'Authorization': token,
+                'Content-type': 'application/json'
+            }
+            
+            axios.get(url, {headers: header})
             .then(response => {
                 resolve(response.data)
             })

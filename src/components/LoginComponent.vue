@@ -1,5 +1,5 @@
 <template>
-    <div class="container my-4" @submit.prevent="login()">
+    <div class="container my-4" @submit.prevent="login">
         <h1>Iniciar sesión</h1>
         <hr>
         <form>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { Global } from '@/Global';
 import CubosService from '@/services/CubosService';
 
 const service = new CubosService();
@@ -45,13 +46,19 @@ export default {
             }
         }
     },
+    mounted(){
+        if(Global.token !== null){
+            this.$router.push('/perfil');
+        }
+    },
     methods:{
         login(){
             service.setLogin(this.user)
             .then(res=>{
-                console.log(res)
-                // localStorage.setItem('bearer_token', res.response)
-                // this.emit('updateIsLogin', true);
+                if(res !== undefined){
+                    Global.token = 'Bearer '+ res;
+                    this.$router.push('/perfil')
+                } 
             })
         }
     }
