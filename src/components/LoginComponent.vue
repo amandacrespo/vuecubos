@@ -49,6 +49,7 @@ export default {
     mounted(){
         if(Global.token !== null){
             this.$router.push('/perfil');
+            alert('Ya estás registrado!');
         }
     },
     methods:{

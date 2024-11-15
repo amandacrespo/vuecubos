@@ -37,6 +37,7 @@ export default {
     mounted(){
         if(Global.token == null){
             this.$router.push('/login');
+            alert('Debes estar registrado para acceder a tus compras');
         } else {
             service.getCompras(Global.token)
             .then(res => {

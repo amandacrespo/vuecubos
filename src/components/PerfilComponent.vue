@@ -38,6 +38,7 @@ export default {
     mounted(){
         if(Global.token == null){
             this.$router.push('/login');
+            alert('Debes estar registrado para acceder al perfil');
         } else {
             service.getPerfil(Global.token)
             .then(res => {
