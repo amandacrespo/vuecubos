@@ -1,8 +1,8 @@
 <template>
-    <div class="container my-4" @submit.prevent="login">
+    <div class="container my-4">
         <h1>Iniciar sesión</h1>
         <hr>
-        <form>
+        <form  @submit.prevent="login">
             <div class="mb-3">
                 <label 
                     for="email" 

@@ -30,7 +30,14 @@
                             </li>    
                             <li class="nav-item">
                                 <router-link class="dropdown-item" to="/">Registrarse</router-link>
-                            </li>    
+                            </li>       
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Usuario
+                        </a>
+                        <ul class="dropdown-menu"> 
                             <li class="nav-item">
                                 <router-link class="dropdown-item" to="/perfil">Perfil</router-link>
                             </li>    
@@ -71,6 +78,7 @@ export default {
             // localStorage.removeItem('bearer_token');
             Global.token = null;
             this.$router.push('/login');
+            alert('Sesión cerrada correctamente');
         }
     },
     watch:{
